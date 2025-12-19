@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>PowerShell Function Documentation</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+        h1 { color: #2c3e50; }
+        h2 { color: #34495e; }
+        pre { background: #eeeeee; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        code { font-family: Consolas, monospace; color: #2c3e50; }
+        .hidden { display: none; }
+        button { background: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-bottom: 10px; }
+        button:hover { background: #2980b9; }
+    </style>
+    <script>
+        function toggleDetails(sectionId, buttonId) {
+            var section = document.getElementById(sectionId);
+            var button = document.getElementById(buttonId);
+
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+                button.innerText = 'Hide details';
+            } else {
+                section.classList.add('hidden');
+                button.innerText = 'Click for details';
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>PowerShell Function Documentation</h1>
+<p><strong>Generated from PowerShell source files</strong></p>
+<h2>Function: Export-ControllerScriptDocumentation</h2>
+<p><em>From: documentation.ps1</em></p>
+<button id='btn_Export-ControllerScriptDocumentation' onclick="toggleDetails('help_Export-ControllerScriptDocumentation','btn_Export-ControllerScriptDocumentation')">Click for details</button>
+<pre id='help_Export-ControllerScriptDocumentation' class='functionHelp hidden'><code>.SYNOPSIS
+    Extracts top comment blocks from PowerShell controller scripts and generates both Markdown and HTML summaries.
+
+.DESCRIPTION
+    This function scans all `.ps1` files in a specified folder, extracts the initial comment block,
+    and writes formatted Markdown and HTML files summarizing each script.
+
+.PARAMETER FolderPath
+    The path to the folder containing the controller `.ps1` scripts.
+
+.PARAMETER MarkdownOutputPath
+    The full path to the output Markdown file.
+
+.PARAMETER HtmlOutputPath
+    The full path to the output HTML file.
+
+.EXAMPLE
+    Export-ControllerScriptDocumentation -FolderPath "C:\Scripts\Controllers" `
+        -MarkdownOutputPath "C:\Scripts\README_Controller_Scripts.md" `
+        -HtmlOutputPath "C:\Scripts\README_Controller_Scripts.html"
+
+.NOTES</code></pre>
+<h2>Function: Export-FunctionHelpDocumentation</h2>
+<p><em>From: documentation.ps1</em></p>
+<button id='btn_Export-FunctionHelpDocumentation' onclick="toggleDetails('help_Export-FunctionHelpDocumentation','btn_Export-FunctionHelpDocumentation')">Click for details</button>
+<pre id='help_Export-FunctionHelpDocumentation' class='functionHelp hidden'><code>.SYNOPSIS
+    Extracts help blocks from PowerShell functions and generates Markdown and HTML documentation.
+
+.DESCRIPTION
+    Works with a single PS1 file or a folder containing multiple PS1 files in the same directory.
+    Generates one combined Markdown and HTML file with documentation for all functions found.
+
+.PARAMETER Path
+    Path to a single PS1 file or a folder containing PS1 files.
+
+.PARAMETER MarkdownOutputPath
+    Where to save the generated Markdown file.
+
+.PARAMETER HtmlOutputPath
+    Where to save the generated HTML file.
+
+.NOTES</code></pre>
+<h2>Function: Update-GitHubRepos</h2>
+<p><em>From: git.ps1</em></p>
+<button id='btn_Update-GitHubRepos' onclick="toggleDetails('help_Update-GitHubRepos','btn_Update-GitHubRepos')">Click for details</button>
+<pre id='help_Update-GitHubRepos' class='functionHelp hidden'><code>.SYNOPSIS
+Runs 'git pull' on all Git repositories under a root directory.
+
+.DESCRIPTION
+Iterates through each subdirectory of the specified root path.
+If the folder contains a Git repository (.git folder), it performs
+a 'git pull' to fetch and merge the latest changes from the remote.
+
+Git output written to STDERR is redirected to STDOUT to prevent
+PowerShell from reporting false NativeCommandError messages.
+
+.PARAMETER RootPath
+The root directory containing Git repositories.
+Defaults to the value of $GitHubRoot.
+
+.EXAMPLE
+Update-GitHubRepos
+
+Runs git pull on all Git repositories under the default GitHub root.
+
+.EXAMPLE
+Update-GitHubRepos -RootPath "D:\Repos"
+
+Runs git pull on all Git repositories under D:\Repos.
+
+.NOTES
+Requirements:
+- Git for Windows installed
+- git.exe available on PATH
+- PowerShell 5.1 compatible</code></pre>
+<h2>Function: Get-GitRepoStatus</h2>
+<p><em>From: git.ps1</em></p>
+<button id='btn_Get-GitRepoStatus' onclick="toggleDetails('help_Get-GitRepoStatus','btn_Get-GitRepoStatus')">Click for details</button>
+<pre id='help_Get-GitRepoStatus' class='functionHelp hidden'><code>.SYNOPSIS
+Displays a clean or dirty status for all Git repositories under a root directory.
+
+.DESCRIPTION
+Get-GitRepoStatus iterates through each subdirectory of the specified root path.
+If a directory contains a Git repository (.git folder), the function runs
+'git status --porcelain' to determine whether the working tree has uncommitted
+changes.
+
+Repositories are reported as:
+- CLEAN: No uncommitted or untracked files
+- DIRTY: One or more uncommitted or untracked files exist
+
+.PARAMETER RootPath
+The root directory containing one or more Git repositories.
+Defaults to the value of $GitHubRoot.
+
+.EXAMPLE
+Get-GitRepoStatus
+
+Displays CLEAN or DIRTY status for all Git repositories in the default GitHub root.
+
+.EXAMPLE
+Get-GitRepoStatus -RootPath "D:\Repos"
+
+Displays CLEAN or DIRTY status for all Git repositories under D:\Repos.
+
+.OUTPUTS
+None.
+This function writes status information directly to the host.
+
+.NOTES
+Requirements:
+- Git for Windows installed
+- git.exe available on PATH
+- PowerShell 5.1 compatible
+
+Uses 'git status --porcelain' for reliable, script-friendly output.</code></pre>
+</body>
+</html>

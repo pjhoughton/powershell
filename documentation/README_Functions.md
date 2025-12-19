@@ -1,6 +1,61 @@
-﻿# Powershell Functions related to Git
-function Update-GitHubRepos {
-<#
+﻿# PowerShell Function Documentation
+
+Extracted Extraction
+## Function: Export-ControllerScriptDocumentation
+*From: documentation.ps1*
+
+```powershell
+.SYNOPSIS
+    Extracts top comment blocks from PowerShell controller scripts and generates both Markdown and HTML summaries.
+
+.DESCRIPTION
+    This function scans all `.ps1` files in a specified folder, extracts the initial comment block,
+    and writes formatted Markdown and HTML files summarizing each script.
+
+.PARAMETER FolderPath
+    The path to the folder containing the controller `.ps1` scripts.
+
+.PARAMETER MarkdownOutputPath
+    The full path to the output Markdown file.
+
+.PARAMETER HtmlOutputPath
+    The full path to the output HTML file.
+
+.EXAMPLE
+    Export-ControllerScriptDocumentation -FolderPath "C:\Scripts\Controllers" `
+        -MarkdownOutputPath "C:\Scripts\README_Controller_Scripts.md" `
+        -HtmlOutputPath "C:\Scripts\README_Controller_Scripts.html"
+
+.NOTES
+```
+
+## Function: Export-FunctionHelpDocumentation
+*From: documentation.ps1*
+
+```powershell
+.SYNOPSIS
+    Extracts help blocks from PowerShell functions and generates Markdown and HTML documentation.
+
+.DESCRIPTION
+    Works with a single PS1 file or a folder containing multiple PS1 files in the same directory.
+    Generates one combined Markdown and HTML file with documentation for all functions found.
+
+.PARAMETER Path
+    Path to a single PS1 file or a folder containing PS1 files.
+
+.PARAMETER MarkdownOutputPath
+    Where to save the generated Markdown file.
+
+.PARAMETER HtmlOutputPath
+    Where to save the generated HTML file.
+
+.NOTES
+```
+
+## Function: Update-GitHubRepos
+*From: git.ps1*
+
+```powershell
 .SYNOPSIS
 Runs 'git pull' on all Git repositories under a root directory.
 
@@ -31,45 +86,12 @@ Requirements:
 - Git for Windows installed
 - git.exe available on PATH
 - PowerShell 5.1 compatible
-#>
+```
 
-    param (
-        [string]$RootPath = $GitHubRoot
-    )
+## Function: Get-GitRepoStatus
+*From: git.ps1*
 
-    if (-not (Test-Path $RootPath)) {
-        Write-Error "Path not found: $RootPath"
-        return
-    }
-
-    Get-ChildItem -Path $RootPath -Directory | ForEach-Object {
-
-        $repoPath = $_.FullName
-        $gitDir   = Join-Path $repoPath ".git"
-
-        if (Test-Path $gitDir) {
-
-            Write-Host "`nUpdating repo: $($_.Name)" -ForegroundColor Cyan
-
-            Push-Location $repoPath
-
-            # Run git pull and suppress false NativeCommandError output
-            git pull 2>&1
-
-            # Optional: check real git failure
-            if ($LASTEXITCODE -ne 0) {
-                Write-Host "Git pull failed in $($_.Name)" -ForegroundColor Red
-            }
-
-            Pop-Location
-        }
-        else {
-            Write-Host "Skipping (not a git repo): $($_.Name)" -ForegroundColor DarkYellow
-        }
-    }
-}
-function Get-GitRepoStatus {
-<#
+```powershell
 .SYNOPSIS
 Displays a clean or dirty status for all Git repositories under a root directory.
 
@@ -108,29 +130,5 @@ Requirements:
 - PowerShell 5.1 compatible
 
 Uses 'git status --porcelain' for reliable, script-friendly output.
-#>
-    param (
-        [string]$RootPath = $GitHubRoot
-    )
-
-    Get-ChildItem $RootPath -Directory | ForEach-Object {
-        $gitDir = Join-Path $_.FullName ".git"
-
-        if (Test-Path $gitDir) {
-            Push-Location $_.FullName
-            $status = git status --porcelain 2>&1
-            Pop-Location
-
-            if ($status) {
-                Write-Host "DIRTY  : $($_.Name)" -ForegroundColor Yellow
-            }
-            else {
-                Write-Host "CLEAN  : $($_.Name)" -ForegroundColor Green
-            }
-        }
-    }
-}
-
-
-
+```
 
