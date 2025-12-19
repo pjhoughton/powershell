@@ -1,0 +1,128 @@
+# ───────────────────────────────────────────────
+# Override ignore rules for important files
+# Always keep these tracked, even if they match patterns below
+!inventory
+!ansible.cfg
+!README.md
+!*.cfg
+!*.md
+!*.yml
+!*.yaml
+!*.MD
+!demo_ansible_vault.pass
+!.gitignore
+!.gitkeep
+
+# ───────────────────────────────────────────────
+# Ansible specific ignores
+# Vault pass files and runtime artifacts
+ansible_vault.pass
+tmp/
+retries/
+
+# ───────────────────────────────────────────────
+# Secrets, keys, and environment files
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+*.asc
+*.gpg
+*.pub
+*.ssh
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+*.env
+.env.*
+secret.yaml
+secrets.yaml
+*.secret
+*.secrets
+*.vault
+*.token
+*.credentials
+*.config.json
+.gitconfig
+
+# ───────────────────────────────────────────────
+# Temporary and environment files
+*.swp
+*.tmp
+*.bak
+*.log
+*.old
+
+# ───────────────────────────────────────────────
+# Windows system and temp files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+*.lnk
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.stackdump
+
+# ───────────────────────────────────────────────
+# Crash logs and dumps
+*.err
+*.dmp
+
+# ───────────────────────────────────────────────
+# Hidden system files (cross‑platform)
+.DS_Store
+
+# ───────────────────────────────────────────────
+# Python cache (if using Ansible modules locally)
+__pycache__/
+*.pyc
+*.pyo
+
+# ───────────────────────────────────────────────
+# IDE/editor configs
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# ───────────────────────────────────────────────
+# Node / frontend (if applicable)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ───────────────────────────────────────────────
+# Docker / container artifacts
+*.pid
+*.sock
+*.cid
+*.tar
+*.gz
+*.tgz
+*.img
+*.iso
+
+# ───────────────────────────────────────────────
+# Backup and archive files
+*.zip
+*.7z
+*.rar
+*.gz
+*.tar
+*.tgz
+*.xz
+
+# ───────────────────────────────────────────────
+# Miscellaneous
+*.coverage
+*.cache
+*.out
